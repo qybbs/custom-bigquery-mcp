@@ -2,17 +2,17 @@
 
 A standalone Model Context Protocol (MCP) server for Google Cloud BigQuery with enterprise FinOps guardrails, query cost estimation, and strict table allowlisting.
 
-## Quick Start with npx (Zero Installation)
+## Quick Start via GitHub (Zero Installation)
 
-You can run this MCP server directly without cloning or installing dependencies:
+You can run this MCP server directly without cloning or publishing to npm:
 
 ```bash
-# Set your GCP credentials in environment variables
+# Set your GCP credentials
 export GCP_PROJECT_ID="your-project-id"
 export ALLOWLIST_TABLES="project.dataset.table1,dataset.table2"
 
-# Run via npx
-npx -y @qybbs/custom-bigquery-mcp
+# Run directly via GitHub using npx
+npx -y github:qybbs/custom-bigquery-mcp
 ```
 
 ### Integration with saas-to-mcp-gateway
@@ -21,9 +21,10 @@ Add to your `gateway-mcp-config.json`:
 "bigquery": {
   "type": "stdio",
   "command": "npx",
-  "args": ["-y", "@qybbs/custom-bigquery-mcp"],
+  "args": ["-y", "github:qybbs/custom-bigquery-mcp"],
   "env": {
     "GCP_PROJECT_ID": "${GCP_PROJECT_ID}",
+    "GCP_KEY_FILE_PATH": "${GCP_KEY_FILE_PATH}",
     "ALLOWLIST_TABLES": "${ALLOWLIST_TABLES}",
     "MAX_BYTES_BILLED": "${MAX_BYTES_BILLED}",
     "ROW_LIMIT": "${ROW_LIMIT}"
@@ -37,7 +38,7 @@ Add to your `gateway-mcp-config.json`:
   "mcpServers": {
     "bigquery": {
       "command": "npx",
-      "args": ["-y", "@qybbs/custom-bigquery-mcp"],
+      "args": ["-y", "github:qybbs/custom-bigquery-mcp"],
       "env": {
         "GCP_PROJECT_ID": "your-project-id",
         "ALLOWLIST_TABLES": "dataset.table1"
