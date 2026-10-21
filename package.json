@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "Standalone Model Context Protocol (MCP) server for Google Cloud BigQuery with strict FinOps guardrails",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
   "bin": {
-    "custom-bigquery-mcp": "dist/index.js",
-    "@qybbs/custom-bigquery-mcp": "dist/index.js"
+    "custom-bigquery-mcp": "./dist/index.js"
   },
   "files": [
     "dist",
@@ -26,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/qybbs/custom-bigquery-mcp.git"
+    "url": "git+https://github.com/qybbs/custom-bigquery-mcp.git"
   },
   "homepage": "https://github.com/qybbs/custom-bigquery-mcp#readme",
   "bugs": {
