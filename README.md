@@ -1,6 +1,51 @@
-# custom-bigquery-mcp
+# @qybbs/custom-bigquery-mcp
 
 A standalone Model Context Protocol (MCP) server for Google Cloud BigQuery with enterprise FinOps guardrails, query cost estimation, and strict table allowlisting.
+
+## Quick Start with npx (Zero Installation)
+
+You can run this MCP server directly without cloning or installing dependencies:
+
+```bash
+# Set your GCP credentials in environment variables
+export GCP_PROJECT_ID="your-project-id"
+export ALLOWLIST_TABLES="project.dataset.table1,dataset.table2"
+
+# Run via npx
+npx -y @qybbs/custom-bigquery-mcp
+```
+
+### Integration with saas-to-mcp-gateway
+Add to your `gateway-mcp-config.json`:
+```json
+"bigquery": {
+  "type": "stdio",
+  "command": "npx",
+  "args": ["-y", "@qybbs/custom-bigquery-mcp"],
+  "env": {
+    "GCP_PROJECT_ID": "${GCP_PROJECT_ID}",
+    "ALLOWLIST_TABLES": "${ALLOWLIST_TABLES}",
+    "MAX_BYTES_BILLED": "${MAX_BYTES_BILLED}",
+    "ROW_LIMIT": "${ROW_LIMIT}"
+  }
+}
+```
+
+### Integration with Claude Desktop / Cursor MCP
+```json
+{
+  "mcpServers": {
+    "bigquery": {
+      "command": "npx",
+      "args": ["-y", "@qybbs/custom-bigquery-mcp"],
+      "env": {
+        "GCP_PROJECT_ID": "your-project-id",
+        "ALLOWLIST_TABLES": "dataset.table1"
+      }
+    }
+  }
+}
+```
 
 ## Features
 
@@ -30,17 +75,25 @@ MAX_BYTES_BILLED=10737418240
 ROW_LIMIT=1000
 ```
 
-## Running as MCP Server
+## Local Development & Testing
 
 ```bash
-# Build
+# Install dependencies
 npm install
+
+# Build
 npm run build
 
-# Start stdio server
-node dist/index.js
+# Run unit tests
+npm test
+
+# Dry-run pack
+npm run pack:dry
+
+# Start stdio server locally
+npm start
 ```
 
 ## License
 
-MIT License
+[MIT License](LICENSE)

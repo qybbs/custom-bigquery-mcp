@@ -17,7 +17,7 @@ import {
 
 const server = new Server(
   {
-    name: 'custom-bigquery-mcp',
+    name: '@qybbs/custom-bigquery-mcp',
     version: '1.0.0',
   },
   {
